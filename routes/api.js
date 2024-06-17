@@ -24,7 +24,6 @@ module.exports = function (app) {
       let title = req.body.title;
       try {
         const book = await BookModel.create({ title: title });
-        console.log(book)
         res.send(book);
       } catch {
         res.send('missing required field title')
@@ -63,6 +62,7 @@ module.exports = function (app) {
 
     .delete(async function (req, res) {
       let bookid = req.params.id;
+      console.log(bookid);
       const result = await BookModel.deleteOne({ _id: bookid });
       if (!result.deletedCount) return res.send('no book exists');
       res.send('delete successful')
